@@ -1,0 +1,21 @@
+<%- include("partials/header") %>
+
+
+<h1>Welcome to the Active Trades Page</h1>
+<div class="container">
+    <% trades.forEach(function(trade){ %>
+        <div class="border border-success m-5">
+            <h1> <%= trade.scrip %></h1>
+            <p> <%= trade.price %></p>
+            <p> <%= trade.indicator %></p>
+            <p> <%= trade.createdAt %></p>
+            <p> <%= trade.updatedAt %></p>
+
+        </div>
+
+    <% }) %>
+</div>
+
+
+
+<%- include("partials/footer") %>

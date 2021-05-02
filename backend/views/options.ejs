@@ -1,0 +1,159 @@
+<%- include("partials/header") %>
+
+
+<div class="jumbotron">
+    <h1 class="display-4">Welcome to the Options Page</h1>
+    <p>Welcome to Options Portal</p>
+</div>
+
+
+<div>
+    <div class="row">
+        <div class="col-8">
+            <div class="options-container enter-options">
+                <form method="POST" action="/trades/options" id="optionsForm">
+                    <div class="row mt-1">
+                        <div class="col">
+                            <label>Trade</label>
+                            <select name="trade" class="form-control" form="optionsForm">
+                                <option value="BUY">BUY</option>
+                                <option value="SELL">SELL</option>
+                            </select> 
+                        </div>
+            
+                        <div class="col">
+                            <label>Option Name</label>
+                            <input type="text" name="optionName" class="form-control" placeholder="Ex: NIFTY">
+                        </div>
+                    </div>
+            
+                    <div class="row mt-1">
+                        <div class="col">
+                            <label>Strike Value</label>
+                            <input type="text" name="levelValue" class="form-control" placeholder="Ex: 13500">
+                        </div>
+            
+                        <div class="col">
+                            <label>Type</label>
+                            <select name="type" class="form-control" form="optionsForm">
+                                <option value="CE">CE</option>
+                                <option value="PE">PE</option>
+                            </select> 
+                        </div>
+                    </div>
+            
+                    <div class="row mt-1">
+                        <div class="col">
+                            <label for="weekDate">Date</label>
+                            <input id="weekDate" name="date" class="form-control" type="date">
+                        </div>
+            
+                        <div class="col">
+                            <label>Entry point</label>
+                            <input type="text" name="entry" class="form-control" placeholder="Ex: 84">
+                        </div>
+                    </div>
+            
+                    <div class="row mt-1">
+                        <div class="col">
+                            <label>Stop loss</label>
+                            <input type="text" name="stopLoss" class="form-control" placeholder="Ex: 76">
+                        </div>
+            
+                        <div class="col">
+                            <label>Target</label>
+                            <input type="text" name="target" class="form-control" placeholder="Ex: 98">
+                        </div>
+                    </div>
+            
+                    <input type="submit" formmethod="POST" value="Submit" class="btn btn-primary mt-2">
+                  </form>
+            
+            
+            
+            </div>
+        </div>
+        <div class="col-4">
+            <h1 class="mt-5">
+                <a href="/trades/options/history" class="past-data">Show Past Trades</a>
+            </h1>
+        </div>
+    </div>
+</div>
+
+
+
+<div class="m-3">
+    <h1 class="display-4 mt-3">Active Options</h1>
+    <% options.forEach(function(option){ %>
+        <div> 
+            <div class="row option-row ">
+                <div class="col-2">
+                    <h3 class="option-data trade-details"><%= option.tradeType %></h3>
+                </div>
+                <div class="col-2">
+                    <h3 class="option-data trade-details"><%= option.optionName %></h3>
+                </div>
+                <div class="col-2">
+                    <h3 class="option-data trade-details"><%= option.weekDate %></h3>
+                </div>
+                <div class="col-2">
+                    <h3 class="option-data trade-details"><%= option.levelValue %></h3>
+                </div>
+                <div class="col-2">
+                    <h3 class="option-data trade-details"><%= option.callOrPut %></h3>
+                </div>
+            </div>
+
+            <div class="row option-row">
+                <% if( option.entry === "BUY"){ %>
+                    <div class="col">
+                        <h3 class="option-data">Enter at or Below - <%= option.entry %></h3>
+                    </div>
+                <%}else{ %>
+                    <div class="col">
+                        <h3 class="option-data">Enter at or Above - <%= option.entry %></h3>
+                    </div>
+                <%} %>
+                
+            </div>
+
+            <div class="row option-row">
+                <div class="col-2">
+                    <h3 class="option-data">Stop Loss - <%= option.stopLoss %> <button class="btn btn-sm btn-success">SLU</button></h3>
+                </div>
+                <div class="col-2">
+                    <h3 class="option-data">Target - <%= option.target %></h3>
+                </div>
+            </div>
+
+            <div class="row option-row">
+                <div class="col-2">
+                    <h3 class="option-data">Potential Profit - <%= Math.abs(parseInt(option.target) - parseInt(option.entry)) * 75 %> </h3>
+                </div>
+                <div class="col-2">
+                    <h3 class="option-data">Maximum Loss - <%= Math.abs(parseInt(option.entry) - parseInt(option.stopLoss)) * 75 %></h3>
+                </div>
+                <div class="col-8">
+                    <form>
+                        <input type="hidden" name="optionId" value="<%=option._id%>">
+                        <button class="btn btn-sm btn-success mr-3" type="submit" formaction="/trades/options/enter" formmethod="POST">Entered</button>
+                        <button class="btn btn-sm btn-outline-dark mr-3" type="submit" formaction="/trades/options/sl@cost" formmethod="POST">SL@Cost</button>
+                        <button class="btn btn-sm btn-warning mr-3" type="submit">SL Hit</button>
+                        <button class="btn btn-sm btn-info mr-3" type="submit">TGT1 Hit</button>
+                        <button class="btn btn-sm btn-info mr-3" type="submit">TGT2 Hit</button>
+                        <button class="btn btn-sm btn-danger mr-3" type="submit" formaction="/trades/options/delete" formmethod="POST">Delete</button>
+                        <button class="btn btn-sm btn-danger mr-3" type="submit" formaction="/trades/options/immexit" formmethod="POST">ImmediateExit</button>
+                    </form>
+                </div>
+            </div>     
+        </div>
+
+      <hr class="my-4">
+
+
+
+    <% }) %>
+</div>
+
+<%- include("partials/footer") %>

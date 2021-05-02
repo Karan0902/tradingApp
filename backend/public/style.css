@@ -1,0 +1,107 @@
+.list-group-item{
+    border: 0;
+}
+
+.trade-data{
+    font-weight: bold;
+}
+
+.navbar{
+    background-color: black;
+}
+.navbar-brand{
+    width: 20%;
+
+}
+
+.zeus{
+    width: 20%;
+}
+
+a{
+    color: white;
+    font-family: 'Montserrat', sans-serif;
+}
+
+a:hover{
+    color: rgb(197, 197, 197);
+    font-weight: bold;
+}
+
+.footer {
+    position: fixed;
+    font-size: small;
+    padding-bottom: 0;
+    left: 0;
+    bottom: 0;
+    width: 100%;
+    color: rgb(148, 148, 148);
+    font-family: 'Montserrat', sans-serif;
+}
+
+.past-data{
+    color: black;
+    font-family: 'Montserrat', sans-serif;
+    
+}
+.past-data:hover{
+    font-weight: lighter;
+    color: rgb(90, 90, 90);
+    text-decoration: none;
+}
+
+.buy-trade{
+    background-color: black;
+    font-family: 'Montserrat', sans-serif;
+    font-size: large;
+    color: white;
+    margin-top: 2%;
+}
+
+.sell-trade{
+    background-color: rgb(192, 192, 192);
+    font-family: 'Montserrat', sans-serif;
+    font-size: large;
+    color: black;
+    margin-top: 2%;
+
+}
+
+.share-label{
+    font-family: 'Montserrat', sans-serif;
+    font-size: 2rem;
+}
+
+.form-group{
+    width: 75%;
+    margin: 0;
+}
+
+.form-control{
+    display: inline-block;
+    width: 100%;
+}
+
+.options-container{
+    width: 70%;
+    margin-left: 10%;
+}
+
+.trade-type{
+    display: inline-block;
+    margin-left: 1%;
+}
+
+.option-data{
+    font-size: medium;
+    font-weight: lighter;
+}
+
+.option-row{
+    margin-left: 5%;
+}
+
+.trade-details{
+    font-size: 1.5rem;
+    font-weight: 600;
+}

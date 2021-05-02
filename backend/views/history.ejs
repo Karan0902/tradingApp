@@ -1,0 +1,69 @@
+<%- include("partials/header") %>
+
+<div class="jumbotron">
+    <h1 class="display-4">Welcome to the History Page</h1>
+    <p>Welcome to Delivery Portal</p>
+</div>
+
+
+<div class="p-5">
+    <h1>History Trades</h1>
+    <% if(trades.length === 0){ %>
+        <h4>NOTHING TO DISPLAY</h4>
+    <% } else{ %>
+        <% trades.forEach(function(trade){ %>
+            <div class="m-5">
+                <h1 class="font-weight-light"> <%= trade.scrip %></h1>
+                <h3 class="text-primary font-weight-light"> <%= trade.indicator %></h3>
+                <div class="pl-5">  
+                  <div class="row">
+      
+                    <div class="col-2 trade-data">
+                      entry 
+                    </div>
+      
+                    <div class="col">
+                      <%= trade.price.toFixed(2) %> 
+                    </div>
+      
+                    <div class="col">
+                      <%= trade.createdAt.getDate() + "/" + parseInt(trade.createdAt.getMonth())+1 + "/" + trade.createdAt.getFullYear() %> 
+                    </div>
+      
+                    <div class="col">
+                      <%= trade.createdAt.getHours() + ":" + parseInt(trade.createdAt.getMinutes()) + ":" + trade.createdAt.getSeconds() %>                 
+                    </div>
+                  </div> 
+      
+                  <div class="row">
+                    <div class="col-2 trade-data">
+                      exit
+                    </div>
+
+                    <div class="col">
+                        <%= trade.price.toFixed(2) %> 
+                    </div>
+      
+                    <div class="col">
+                        <%= trade.updatedAt.getDate() + "/" + parseInt(trade.updatedAt.getMonth())+1 + "/" + trade.updatedAt.getFullYear() %> 
+                    </div>
+
+
+                    <div class="col">
+                        <%= trade.updatedAt.getHours() + ":" + parseInt(trade.updatedAt.getMinutes()) + ":" + trade.updatedAt.getSeconds() %>
+                    </div>
+    
+                  </div>
+                </div>
+                
+            </div>
+            <hr class="my-4">
+      
+        <% }) %>
+    <% } %>
+
+  </div>
+
+
+
+<%- include("partials/footer") %>

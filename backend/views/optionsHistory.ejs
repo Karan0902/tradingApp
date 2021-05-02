@@ -1,0 +1,86 @@
+<%- include("partials/header") %>
+
+<div class="jumbotron">
+    <h1 class="display-4">Welcome to the Options History Page</h1>
+    <p>Welcome to Options Portal</p>
+</div>
+
+<div class="p-5">
+    <h1>History Trades</h1>
+    <% if(options.length === 0){ %>
+        <h4>NOTHING TO DISPLAY</h4>
+    <% } else{ %>
+        <% options.forEach(function(option){ %>
+            <div> 
+                <div class="row option-row ">
+                    <div class="col-2">
+                        <h3 class="option-data trade-details"><%= option.tradeType %></h3>
+                    </div>
+                    <div class="col-2">
+                        <h3 class="option-data trade-details"><%= option.optionName %></h3>
+                    </div>
+                    <div class="col-2">
+                        <h3 class="option-data trade-details"><%= option.levelValue %></h3>
+                    </div>
+                    <div class="col-2">
+                        <h3 class="option-data trade-details"><%= option.callOrPut %></h3>
+                    </div>
+                    <div class="col-2">
+                        <h3 class="option-data trade-details"><%= option.weekDate %></h3>
+                    </div>
+                </div>
+    
+                <div class="row option-row">
+                    <div class="col">
+                        <h3 class="option-data">Enter Below - <%= option.entry %></h3>
+                    </div>
+                </div>
+    
+                <div class="row option-row">
+                    <div class="col-2">
+                        <h3 class="option-data">Stop Loss - <%= option.stopLoss %></h3>
+                    </div>
+                    <div class="col-2">
+                        <h3 class="option-data">Target - <%= option.target %></h3>
+                    </div>
+                </div>
+    
+                <div class="row option-row">
+                    <div class="col-2">
+                        <h3 class="option-data">Maximum Profit - <%= (parseInt(option.target) - parseInt(option.entry)) * 75 %> </h3>
+                    </div>
+                    <div class="col-2">
+                        <h3 class="option-data">Maximum Loss - <%= (parseInt(option.entry) - parseInt(option.stopLoss)) * 75 %></h3>
+                    </div>
+                </div>    
+                <div class="row option-row">
+                    <div class="col-2">
+                        <%= option.createdAt.getDate() + "/" + parseInt(option.createdAt.getMonth())+1 + "/" + option.createdAt.getFullYear() %> 
+                      </div>
+                      <div class="col-2">
+                        <%= option.createdAt.getHours() + ":" + parseInt(option.createdAt.getMinutes()) + ":" + option.createdAt.getSeconds() %>                 
+                      </div>
+                </div> 
+                <div class="row option-row">
+                    <div class="col-2">
+                        <%= option.updatedAt.getDate() + "/" + parseInt(option.updatedAt.getMonth())+1 + "/" + option.updatedAt.getFullYear() %> 
+                    </div>
+
+                    <div class="col-2">
+                        <%= option.updatedAt.getHours() + ":" + parseInt(option.updatedAt.getMinutes()) + ":" + option.updatedAt.getSeconds() %>
+                    </div>
+                </div>
+            </div>
+          <hr class="my-4">
+
+        <% }) %>
+    <% } %>
+
+  </div>
+
+
+
+
+
+
+<%- include("partials/footer") %>
